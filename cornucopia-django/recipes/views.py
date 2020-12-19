@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 import os.path
 
 
@@ -11,6 +12,7 @@ def handle_uploaded_file(f):
             destination.write(chunk)
 
 class ImageInput(View):
+    @csrf_exempt 
     def post(self, request):
         try:
             handle_uploaded_file(request.FILES['file.png'])
