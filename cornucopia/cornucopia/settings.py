@@ -25,12 +25,13 @@ SECRET_KEY = '^wp&y=u8-e6a9qf3(#9%d*dpk4!%-bnu85xfzkw&w)0y=au5=s'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'recipes.apps.RecipesConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -75,8 +76,12 @@ WSGI_APPLICATION = 'cornucopia.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'cornucopia',
+        'USER': 'cornucopia',
+        'PASSWORD': 'rnfxjKffunZikj7xNFcs',
+        'HOST': 'cornucopia.cmfe7cpjbggw.us-west-1.rds.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
