@@ -5,8 +5,15 @@
 
 import scrapy
 
+class IngredientItem(scrapy.Item):
+    name = scrapy.Field()
 
-class RecipeCrawlerItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+class RecipeItem(scrapy.Item):
+    title = scrapy.Field()
+    directions = scrapy.Field()
+    link = scrapy.Field()
+    ingredients_all = scrapy.Field()
+    ingredients_used = scrapy.Field()
+    ingredients_needed = scrapy.Field()
+    tags = scrapy.Field()
+    

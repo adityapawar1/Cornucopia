@@ -1,3 +1,6 @@
+from shutil import which
+from platform import platform
+import os.path
 # Scrapy settings for recipe_crawler project
 #
 # For simplicity, this file contains only settings considered important or
@@ -12,12 +15,27 @@ BOT_NAME = 'recipe_crawler'
 SPIDER_MODULES = ['recipe_crawler.spiders']
 NEWSPIDER_MODULE = 'recipe_crawler.spiders'
 
+SPLASH_URL = 'http://localhost:8050/'
+
+DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
+HTTPCACHE_STORAGE = 'scrapy_splash.SplashAwareFSCacheStorage'
+
+# SELENIUM_DRIVER_NAME = 'chrome'
+# if 'Linux' in platform():
+#     print('linux system detected')
+#     SELENIUM_DRIVER_EXECUTABLE_PATH = which('chromedriver')
+# else:
+#     SELENIUM_DRIVER_EXECUTABLE_PATH = '/Users/adityapawar/Documents/chromedriver'
+
+# # SELENIUM_COMMAND_EXECUTOR = which('chromedriver')
+# SELENIUM_DRIVER_ARGUMENTS=['--no-sandbox', '--headless'] 
+
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'recipe_crawler (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -44,15 +62,18 @@ ROBOTSTXT_OBEY = True
 
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
-#SPIDER_MIDDLEWARES = {
+SPIDER_MIDDLEWARES = {
 #    'recipe_crawler.middlewares.RecipeCrawlerSpiderMiddleware': 543,
-#}
+    # 'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
+}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
+DOWNLOADER_MIDDLEWARES = {
 #    'recipe_crawler.middlewares.RecipeCrawlerDownloaderMiddleware': 543,
-#}
+    'scrapy_splash.SplashMiddleware': 725
+    # 'scrapy_selenium.SeleniumMiddleware': 800
+}
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
