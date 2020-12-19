@@ -17,7 +17,13 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var buttonView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        var buttonDict:[String:String] = ["Mac and Cheese": "https://www.espn.com", "Pizza": "https://www.google.com","Walnuts": "https://www.google.com","Bell Peppers": "https://www.youtube.com","Bell Peppers2": "https://www.youtube.com","Bell Peppers3": "https://www.youtube.com","Bell Peppers4": "https://www.youtube.com"]
+        var buttonDict:[String:String] = ["Mac and Cheese": """
+            Preheat the oven. Preheat to 325 degrees and lightly grease a square baking dish.
+            Cook the macaroni. Slightly undercook your noodles (about 1 minute under al-dente). Drain and set aside.
+            Make the roux.  Melt the butter in a medium saucepan over medium heat. Blend in the flour, salt, and pepper. Cook for 2 minutes.
+            Add milk and cheese.  Stir in milk and half and half, slowly, stirring constantly. Remove from heat. Add 1 cup shredded cheese to the sauce and stir just until melted. Add the cooked macaroni noodles and toss to coat them in the sauce.
+            Pour into baking dish.  Pour half or the pasta mixture into the prepared baking dish. Sprinkle 1/2 cup cheese over the top. Pour remaining pasta over it and sprinkle with remaining cheese.
+            """, "Pizza": "https://www.google.com","Walnuts": "https://www.google.com","Bell Peppers": "https://www.youtube.com","Bell Peppers2": "https://www.youtube.com","Bell Peppers3": "https://www.youtube.com","Bell Peppers4": "https://www.youtube.com"]
         for k in 0...buttonDict.values.count - 1{
             UserDefaults.standard.set(Array(buttonDict.values)[k], forKey: String(k))
         }
@@ -52,18 +58,28 @@ class ViewController: UIViewController, UIScrollViewDelegate {
                 // Do any additional setup after loading the view.
     }
     @IBAction func searchAction(_ sender: Any) {
-        print("search button clicked")
+//        let alert = UIAlertController(title: "Input an Ingredient", message: "", preferredStyle: UIAlertController.Style.alert)
+//        alert.addAction(UIAlertAction(title: "Take a Photo", style: UIAlertAction.Style.default, handler: { action in
+//            self.takePicture()
+//        }))
+//        alert.addAction(UIAlertAction(title: "Upload a Photo", style: UIAlertAction.Style.default, handler: nil))
+//        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+//        self.present(alert, animated: true, completion: nil)
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView){
         if scrollView.contentOffset.x != 0{
             scrollView.contentOffset.x = 0
         }
     }
+
     @objc func buttonClicked(sender: UIButton){
         
         var link = UserDefaults.standard.object(forKey: String(sender.tag)) as! String
         print(link)
-        UIApplication.shared.open(URL(string: link)!)
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyboard.instantiateViewController(withIdentifier: "RecipeDisplay")
+        self.present(newViewController, animated: true, completion: nil)
+        
     }
 
 
