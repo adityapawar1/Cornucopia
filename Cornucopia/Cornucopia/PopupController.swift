@@ -10,9 +10,9 @@ import Foundation
 import UIKit
 
 
-class PopupController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+class PopupController: UIViewController, UITextFieldDelegate {
 
-    static var imageView = UIImageView()
+    static var img = UIImage()
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var uploadButton: UIButton!
     @IBOutlet weak var takeButton: UIButton!
@@ -54,9 +54,10 @@ class PopupController: UIViewController, UITextFieldDelegate, UIImagePickerContr
     }
     
     @IBAction func uploadPhoto(_ sender: Any) {
-        if let image = PopupController.imageView.image {
+        print(PopupController.img)
+        let image = PopupController.img
             let imageData = image.jpegData(compressionQuality: 1.0)
-                    
+            print(imageData)
             let urlString = "YOUR_URL_HERE"
             let session = URLSession(configuration: URLSessionConfiguration.default)
                     
@@ -89,7 +90,6 @@ class PopupController: UIViewController, UITextFieldDelegate, UIImagePickerContr
                     
                     task.resume()
                     
-                }
     }
     
     
@@ -102,7 +102,7 @@ class PopupController: UIViewController, UITextFieldDelegate, UIImagePickerContr
     
 
 }
-extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension PopupController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
@@ -112,7 +112,7 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
             self.dismiss(animated: true, completion: { () -> Void in
 
             })
-        PopupController.imageView.image = image
+        PopupController.img = image
         }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -122,7 +122,7 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
         guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
             return
         }
-        PopupController.imageView.image = image
+        PopupController.img = image
     }
 }
 
