@@ -12,8 +12,15 @@ def handle_uploaded_file(f):
 
 class ImageInput(View):
     def post(self, request):
-        handle_uploaded_file(request.FILES['file.png'])
+        try:
+            handle_uploaded_file(request.FILES['file.png'])
+        except:
+            return HttpResponse('File not found under file.png :(')
 
         return HttpResponse('File upload was a success!')
+
+    def get(self, request):
+        return HttpResponse('Use the POST method, not the GET method')
+
 
         
