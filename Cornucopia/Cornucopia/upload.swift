@@ -7,13 +7,36 @@
 //
 
 import UIKit
+import Foundation
 
 class upload: UIViewController {
 
+    @IBOutlet weak var progress: UIProgressView!
+    @IBOutlet weak var finish: UIButton!
+    let progressC = Progress(totalUnitCount: 1)
     override func viewDidLoad() {
         super.viewDidLoad()
+        finish.layer.cornerRadius = 5.0
+        finish.layer.masksToBounds = true
+        progress.transform = progress.transform.scaledBy(x: 1, y: 5)
 
         // Do any additional setup after loading the view.
+    }
+    @IBAction func finish(_ sender: Any) {
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true){(timer) in
+            guard self.progressC.isFinished == false else {
+                timer.invalidate()
+                let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let newViewController = storyboard.instantiateViewController(withIdentifier: "RecipePicker")
+                self.present(newViewController, animated: true, completion: nil)
+                print("finished")
+                return
+            }
+            self.progressC.completedUnitCount += 1
+            let progressFloat = Float(self.progressC.fractionCompleted)
+            self.progress.setProgress(progressFloat, animated: true)
+            self.progress.progress = progressFloat
+        }
     }
     
     @IBAction func addAction(_ sender: Any) {
