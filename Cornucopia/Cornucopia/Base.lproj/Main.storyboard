@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -51,7 +53,7 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="magnifyingglass" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="07t-nc-Jja">
-                                <rect key="frame" x="334" y="36" width="45" height="42.666666666666671"/>
+                                <rect key="frame" x="334" y="36.333333333333329" width="45" height="42.666666666666671"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="45" id="A0m-ph-eAD"/>
@@ -63,7 +65,7 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O34-rp-jIB">
                                         <rect key="frame" x="20" y="8" width="396.33333333333331" height="955"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="955" id="mNR-69-462"/>
                                         </constraints>
@@ -80,7 +82,8 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="74P-N1-xwi"/>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="xZN-Fk-jOj" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="5cS-sZ-9oJ"/>
                             <constraint firstItem="29t-Le-Dls" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="AGG-pU-C8v"/>
@@ -95,7 +98,6 @@
                             <constraint firstItem="Bw9-P8-AwO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="lX5-Dw-Vja"/>
                             <constraint firstItem="xZN-Fk-jOj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="vg6-K1-esG"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <size key="freeformSize" width="414" height="1100"/>
                     <connections>
@@ -121,7 +123,7 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose Your Ingredient" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eEM-1w-fhv">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="60"/>
-                                        <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" systemColor="systemGray5Color"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="7aA-J4-KyA"/>
                                             <constraint firstAttribute="width" secondItem="eEM-1w-fhv" secondAttribute="height" multiplier="187:30" id="flz-zg-yDC"/>
@@ -131,7 +133,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KGu-2t-eA9">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KGu-2t-eA9">
                                         <rect key="frame" x="8" y="204" width="358" height="50"/>
                                         <color key="backgroundColor" red="0.3253201557" green="0.662407207" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -139,9 +141,12 @@
                                             <constraint firstAttribute="width" constant="358" id="R7b-8D-OCW"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                        <state key="normal" title="Upload A Photo">
+                                        <state key="normal" title="Choose a Photo">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="choosePhoto:" destination="PA0-Yu-eTN" eventType="touchUpInside" id="5PF-jg-EMu"/>
+                                        </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Wb-LH-yqV">
                                         <rect key="frame" x="8" y="80" width="358" height="34"/>
@@ -154,7 +159,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L2k-j2-whS">
+                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L2k-j2-whS">
                                         <rect key="frame" x="8" y="134" width="358" height="50"/>
                                         <color key="backgroundColor" red="0.3253201557" green="0.662407207" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -165,6 +170,9 @@
                                         <state key="normal" title="Take A Picture">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="takePhoto:" destination="PA0-Yu-eTN" eventType="touchUpInside" id="eeV-lt-chO"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredient Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hdQ-5H-nIm">
                                         <rect key="frame" x="9" y="64" width="114" height="18"/>
@@ -174,7 +182,7 @@
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ncj-Dt-vQq">
                                         <rect key="frame" x="325" y="14" width="35" height="35"/>
-                                        <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" systemColor="systemRedColor"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="35" id="4vg-Hn-FK9"/>
                                             <constraint firstAttribute="width" secondItem="ncj-Dt-vQq" secondAttribute="height" multiplier="1:1" id="qxS-TQ-7wI"/>
@@ -186,7 +194,7 @@
                                             <action selector="exitClick:" destination="PA0-Yu-eTN" eventType="touchUpInside" id="I0k-NF-BoF"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Zw-Qq-t6B">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Zw-Qq-t6B">
                                         <rect key="frame" x="8" y="276" width="358" height="50"/>
                                         <color key="backgroundColor" red="0.3253201557" green="0.662407207" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -194,12 +202,15 @@
                                             <constraint firstAttribute="width" constant="358" id="qwX-LH-fu6"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                        <state key="normal" title="Confirm">
+                                        <state key="normal" title="Upload Photo">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="uploadPhoto:" destination="PA0-Yu-eTN" eventType="touchUpInside" id="UK0-Kz-Mf2"/>
+                                        </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <constraints>
                                     <constraint firstItem="ncj-Dt-vQq" firstAttribute="top" secondItem="tQO-Jq-gsy" secondAttribute="top" constant="14" id="0BD-ja-f9C"/>
                                     <constraint firstItem="L2k-j2-whS" firstAttribute="top" secondItem="7Wb-LH-yqV" secondAttribute="bottom" constant="20" id="3K4-2h-TyB"/>
@@ -228,16 +239,17 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="KW9-kJ-V8N"/>
                         <constraints>
                             <constraint firstItem="tQO-Jq-gsy" firstAttribute="centerX" secondItem="KW9-kJ-V8N" secondAttribute="centerX" id="0Wp-IR-wXB"/>
                             <constraint firstItem="tQO-Jq-gsy" firstAttribute="top" secondItem="KW9-kJ-V8N" secondAttribute="top" constant="122" id="Brd-Bt-Ed8"/>
                             <constraint firstItem="KW9-kJ-V8N" firstAttribute="trailing" secondItem="tQO-Jq-gsy" secondAttribute="trailing" constant="20" id="OK1-oP-N9P"/>
                             <constraint firstItem="tQO-Jq-gsy" firstAttribute="leading" secondItem="KW9-kJ-V8N" secondAttribute="leading" constant="20" id="f17-cq-Mke"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="KW9-kJ-V8N"/>
                     </view>
                     <connections>
                         <outlet property="exitButton" destination="ncj-Dt-vQq" id="tPT-Lu-vC7"/>
+                        <outlet property="sendPhotoButton" destination="8Zw-Qq-t6B" id="09C-1h-1nJ"/>
                         <outlet property="takeButton" destination="L2k-j2-whS" id="hI2-hB-3Jc"/>
                         <outlet property="textField" destination="7Wb-LH-yqV" id="XSS-uP-00i"/>
                         <outlet property="uploadButton" destination="KGu-2t-eA9" id="vBq-DO-aCe"/>
@@ -251,5 +263,17 @@
     <resources>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

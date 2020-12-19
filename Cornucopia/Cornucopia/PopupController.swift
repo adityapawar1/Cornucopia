@@ -10,12 +10,13 @@ import Foundation
 import UIKit
 
 
-class PopupController: UIViewController, UITextFieldDelegate {
+class PopupController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
 
-    
+    static var imageView = UIImageView()
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var uploadButton: UIButton!
     @IBOutlet weak var takeButton: UIButton!
+    @IBOutlet weak var sendPhotoButton: UIButton!
     @IBOutlet weak var exitButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +35,63 @@ class PopupController: UIViewController, UITextFieldDelegate {
     @IBAction func exitClick(_ sender: Any) {
         dismiss(animated: true)
     }
+    @IBAction func takePhoto(_ sender: Any) {
+        let picker = UIImagePickerController()
+        picker.sourceType = .camera
+        picker.delegate = self
+        self.present(picker, animated: true)
+    }
+    @IBAction func choosePhoto(_ sender: Any) {
+        let imagePicker = UIImagePickerController()
+        if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
+
+                    imagePicker.delegate = self
+                    imagePicker.sourceType = .savedPhotosAlbum
+                    imagePicker.allowsEditing = false
+
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    @IBAction func uploadPhoto(_ sender: Any) {
+        if let image = PopupController.imageView.image {
+            let imageData = image.jpegData(compressionQuality: 1.0)
+                    
+            let urlString = "YOUR_URL_HERE"
+            let session = URLSession(configuration: URLSessionConfiguration.default)
+                    
+            let mutableURLRequest = NSMutableURLRequest(url: NSURL(string: urlString)! as URL)
+                    
+            mutableURLRequest.httpMethod = "POST"
+                    
+                    let boundaryConstant = "----------------12345";
+                    let contentType = "multipart/form-data;boundary=" + boundaryConstant
+                    mutableURLRequest.setValue(contentType, forHTTPHeaderField: "Content-Type")
+                    
+                    // create upload data to send
+                    let uploadData = NSMutableData()
+                    
+                    // add image
+            uploadData.append("\r\n--\(boundaryConstant)\r\n".data(using: String.Encoding.utf8)!)
+            uploadData.append("Content-Disposition: form-data; name=\"picture\"; filename=\"file.png\"\r\n".data(using: String.Encoding.utf8)!)
+            uploadData.append("Content-Type: image/png\r\n\r\n".data(using: String.Encoding.utf8)!)
+            uploadData.append(imageData!)
+            uploadData.append("\r\n--\(boundaryConstant)--\r\n".data(using: String.Encoding.utf8)!)
+                    
+            mutableURLRequest.httpBody = uploadData as Data
+                    
+                    
+            let task = session.dataTask(with: mutableURLRequest as URLRequest, completionHandler: { (data, response, error) -> Void in
+                        if error == nil {
+                            // Image uploaded
+                        }
+                    })
+                    
+                    task.resume()
+                    
+                }
+    }
+    
     
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool{
@@ -44,3 +102,27 @@ class PopupController: UIViewController, UITextFieldDelegate {
     
 
 }
+extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: NSDictionary!){
+            self.dismiss(animated: true, completion: { () -> Void in
+
+            })
+        PopupController.imageView.image = image
+        }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        picker.dismiss(animated: true, completion: nil)
+        
+        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
+            return
+        }
+        PopupController.imageView.image = image
+    }
+}
+
