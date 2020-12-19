@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E6E1687258E7A3F005F91F6 /* RecipeDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6E1686258E7A3F005F91F6 /* RecipeDisplay.swift */; };
+		2E6E1689258E93C0005F91F6 /* login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6E1688258E93C0005F91F6 /* login.swift */; };
+		2E6E168B258E9B94005F91F6 /* upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6E168A258E9B94005F91F6 /* upload.swift */; };
 		2EE95014258D850200EE9C8C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE95013258D850200EE9C8C /* AppDelegate.swift */; };
 		2EE95016258D850200EE9C8C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE95015258D850200EE9C8C /* SceneDelegate.swift */; };
 		2EE95018258D850200EE9C8C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE95017258D850200EE9C8C /* ViewController.swift */; };
@@ -17,6 +20,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2E6E1686258E7A3F005F91F6 /* RecipeDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDisplay.swift; sourceTree = "<group>"; };
+		2E6E1688258E93C0005F91F6 /* login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = login.swift; sourceTree = "<group>"; };
+		2E6E168A258E9B94005F91F6 /* upload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = upload.swift; sourceTree = "<group>"; };
 		2EE95010258D850200EE9C8C /* Cornucopia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cornucopia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EE95013258D850200EE9C8C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2EE95015258D850200EE9C8C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,7 +68,10 @@
 				2EE95015258D850200EE9C8C /* SceneDelegate.swift */,
 				2EE95017258D850200EE9C8C /* ViewController.swift */,
 				2EE95027258D938600EE9C8C /* PopupController.swift */,
+				2E6E1688258E93C0005F91F6 /* login.swift */,
 				2EE95019258D850200EE9C8C /* Main.storyboard */,
+				2E6E168A258E9B94005F91F6 /* upload.swift */,
+				2E6E1686258E7A3F005F91F6 /* RecipeDisplay.swift */,
 				2EE9501C258D850B00EE9C8C /* Assets.xcassets */,
 				2EE9501E258D850B00EE9C8C /* LaunchScreen.storyboard */,
 				2EE95021258D850B00EE9C8C /* Info.plist */,
@@ -142,7 +151,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				2EE95028258D938600EE9C8C /* PopupController.swift in Sources */,
+				2E6E168B258E9B94005F91F6 /* upload.swift in Sources */,
+				2E6E1689258E93C0005F91F6 /* login.swift in Sources */,
 				2EE95018258D850200EE9C8C /* ViewController.swift in Sources */,
+				2E6E1687258E7A3F005F91F6 /* RecipeDisplay.swift in Sources */,
 				2EE95014258D850200EE9C8C /* AppDelegate.swift in Sources */,
 				2EE95016258D850200EE9C8C /* SceneDelegate.swift in Sources */,
 			);
@@ -289,7 +301,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Cornucopia/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -307,7 +318,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Cornucopia/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
