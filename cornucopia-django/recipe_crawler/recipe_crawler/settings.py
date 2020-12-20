@@ -10,7 +10,12 @@ import os.path
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 import sys
-sys.path.append('/Users/adityapawar/Documents/GitHub/Cornucopia/cornucopia-django')
+if 'Linux' in platform():
+    print('linux system detected')
+    sys.path.append('/home/ubuntu/Cornucopia/cornucopia-django')
+else:
+    sys.path.append('/Users/adityapawar/Documents/GitHub/Cornucopia/cornucopia-django')
+
 
 import os
 os.environ['DJANGO_SETTINGS_MODULE'] = 'cornucopia.settings'
