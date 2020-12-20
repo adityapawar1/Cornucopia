@@ -29,9 +29,9 @@ class RecipeSpider(CrawlSpider):
     name = 'RecipeCrawler'
     start_urls = ['http://https://google.com/']
 
-    def __init__(self, indgredients='', *args, **kwargs):
+    def __init__(self, ingredients='', *args, **kwargs):
         super(RecipeSpider, self).__init__(*args, **kwargs)
-        self.indgredients = indgredients.split(',')
+        self.ingredients = ingredients.split(',')
 
     def start_requests(self):
         urls = [
@@ -41,7 +41,7 @@ class RecipeSpider(CrawlSpider):
 
         for url in urls:
             if 'supercook' in url:
-                supercook_query_string = get_supercook_params(self.indgredients)
+                supercook_query_string = get_supercook_params(self.ingredients)
                 print(urlencode(supercook_query_string))
                 yield scrapy.Request(url=url + urlencode(supercook_query_string), callback=self.supercook, method='POST')
 
@@ -64,7 +64,7 @@ class RecipeSpider(CrawlSpider):
             except KeyError:
                 recipe_item['tags'] = []
 
-            request = SplashRequest(url=recipe['hash'], callback=self.get_recipe_data)
+            request = scrapy.Request(url=recipe['hash'], callback=self.get_recipe_data) # , args={'wait': 3}
 
             request.meta['recipe_item'] = recipe_item
             request.meta['display_url'] = recipe['displayurl']
@@ -75,3 +75,4 @@ class RecipeSpider(CrawlSpider):
         recipe_item = response.meta['recipe_item']
         with open('dump.html', 'w+') as file:
             file.write(response.text)
+        print(response.url)
