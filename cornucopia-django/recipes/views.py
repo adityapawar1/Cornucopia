@@ -20,5 +20,5 @@ class RecipeFinder(View):
             return JsonResponse({'yo': 'no json sent'})
             
         body = json.loads(request.body)
-        return JsonResponse({})
+        return JsonResponse(body)
 
