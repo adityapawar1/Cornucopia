@@ -45,12 +45,17 @@ class upload: UIViewController {
                     self.takePicture()
                 }))
                 alert.addAction(UIAlertAction(title: "Upload a Photo", style: UIAlertAction.Style.default, handler: nil))
-                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: { action in 
+                    self.uploadPicture()
+                                                                                                           }))
                 self.present(alert, animated: true, completion: nil)
         
     }
     func takePicture(){
         print("taking picture")
+    }
+    func uploadPicture(){
+        print("uploading picture")
     }
     /*
     // MARK: - Navigation
