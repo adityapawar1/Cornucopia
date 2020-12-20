@@ -65,6 +65,9 @@ class RecipeSpider(CrawlSpider):
             recipe_item['directions'] = ""
             recipe_item['link'] = recipe['hash']
             
+            if len(recipe['uses']) <= 0:
+                return
+                
             recipe_item['used'] = []
             for i in recipe['uses'].split(', '):
                 all_ingredients.append(i)
