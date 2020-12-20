@@ -9,6 +9,7 @@ import requests
 from platform import platform
 
 def get_recipe(ingredient):
+    print(len(Ingredient.objects))
     queryset = Ingredient.objects.filter(name=ingredient)
     if queryset.exists():
         recipe_query = Recipe.objects.filter(ingredient=queryset[0])
