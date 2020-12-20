@@ -51,15 +51,15 @@ def run_spider(ingredients):
     print(f'started spider for {ingredient_string}')
 
     for i in range(20):
-        recipe = get_recipe(ingredients[0])
-        if type(recipe) == type([]):
+        recipes = get_recipe(ingredients[0])
+        if type(recipes) == type([]):
             print(f'{ingredient_string} Scraper Done')
             print(recipe)
             break
         sleep(1)
 
     if type(recipe) == type("string"):
-        recipe =  [
+        recipes =  [
             {
                 'title': 'No Recipe Found',
                 'url': 'None' ,
@@ -70,7 +70,7 @@ def run_spider(ingredients):
             }
         ]
 
-    return recipe
+    return recipes
 
 
 # Create your views here.
@@ -113,7 +113,7 @@ class RecipeFinder(View):
             return JsonResponse({'recipes': recipes}) 
         else:
             recipes = get_recipe(ingredients[0])
-            if type(recipe) == type([]):
+            if type(recipes) == type([]):
                 # scrape
                 recipe = run_spider(ingredients)
                 return JsonResponse({'recipes': recipes})   
