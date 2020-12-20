@@ -54,7 +54,7 @@ def run_spider(ingredients):
         recipes = get_recipe(ingredients[0])
         if type(recipes) == type([]):
             print(f'{ingredient_string} Scraper Done')
-            print(recipe)
+            print(recipes)
             return recipes
         sleep(1)
 
