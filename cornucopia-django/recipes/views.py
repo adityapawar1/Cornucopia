@@ -57,7 +57,9 @@ def run_spider(ingredients):
             break
         sleep(1)
 
-    if type(recipe) != type({}):
+    recipe = get_recipe(ingredients[0])
+
+    if type(recipe) == type("string"):
         recipe =  [
             {
                 'title': 'No Recipe Found',
@@ -109,6 +111,7 @@ class RecipeFinder(View):
         if len(ingredients) > 1:
             # scrape
             recipe = run_spider(ingredients)
+            return JsonResponse({'recipes': recipes}) 
         else:
             recipes = get_recipe(ingredients[0])
             if recipes == 'no_ingredient' or recipes == 'no_recipe':
