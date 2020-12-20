@@ -55,7 +55,7 @@ def run_spider(ingredients):
         if type(recipes) == type([]):
             print(f'{ingredient_string} Scraper Done')
             print(recipe)
-            break
+            return recipes
         sleep(1)
 
     if type(recipe) == type("string"):
