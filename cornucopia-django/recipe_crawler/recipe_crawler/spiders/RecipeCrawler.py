@@ -87,7 +87,7 @@ class RecipeSpider(CrawlSpider):
 
             # request = SplashRequest(url=recipe['hash'], callback=self.get_recipe_data, args={'wait': 3}) # 
 
-            request.meta['recipe_item'] = recipe_item
+            # request.meta['recipe_item'] = recipe_item
             yield recipe_item
 
     def get_recipe_data(self, response):
