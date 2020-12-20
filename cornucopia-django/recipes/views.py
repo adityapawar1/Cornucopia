@@ -57,17 +57,39 @@ def run_spider(ingredients):
             break
         sleep(1)
 
+    if type(recipe) != type({}):
+        recipe =  [
+            {
+                'title': 'No Recipe Found',
+                'url': 'None' ,
+                'ingredients': [
+                    'None'
+                ],
+                'directions': 'None'
+            }
+        ]
+
     return recipe
 
 
 # Create your views here.
 class RecipeFinder(View):
     def get(self, request):
-        if len(request.body) <= 0:
-            return JsonResponse({'yo': 'no json sent'})
+        # if len(request.body) <= 0:
+        #     return JsonResponse({'yo': 'no json sent'})
             
-        body = json.loads(request.body)
-        return JsonResponse({})
+        # body = json.loads(request.body)
+        response = [
+            {
+                'title': 'No Recipe Found',
+                'url': 'None' ,
+                'ingredients': [
+                    'None'
+                ],
+                'directions': 'None'
+            }
+        ]
+        return JsonResponse({'recipes': response})
 
     def post(self, request):
         try:
