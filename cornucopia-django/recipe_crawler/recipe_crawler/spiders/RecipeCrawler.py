@@ -1,10 +1,9 @@
 import scrapy
-# from scrapy_selenium import SeleniumRequest
 from scrapy_splash import SplashRequest
-from selenium.webdriver.common.keys import Keys
 from scrapy.spiders import CrawlSpider
 from urllib.parse import urlencode
 from recipe_crawler.items import IngredientItem, RecipeItem
+from recipes.models import Ingredient
 import json
 
 def get_supercook_params(indgredients):
@@ -32,12 +31,20 @@ class RecipeSpider(CrawlSpider):
     def __init__(self, ingredients='', *args, **kwargs):
         super(RecipeSpider, self).__init__(*args, **kwargs)
         self.ingredients = ingredients.split(',')
+        self.item = IngredientItem() 
+        self.item['name'] = self.ingredients[0]
+
+        ingredient_name = self.ingredients[0]
+        ingredient = Ingredient.objects.filter(name=ingredient_name)
+
+        if not ingredient.exists():
+            ingredient = Ingredient(name=ingredient_name)
+            ingredient.save()
 
     def start_requests(self):
         urls = [
             'https://www.supercook.com/dyn/results?'
         ]
-
 
         for url in urls:
             if 'supercook' in url:
@@ -49,30 +56,40 @@ class RecipeSpider(CrawlSpider):
         jsonresponse = json.loads(response.text)
         recipes = jsonresponse['results']
         self.logger.debug(recipes)
-        urls = []
-        for recipe in recipes[0:10]:
+
+        for recipe in recipes[0:5]:
+            all_ingredients = []
             recipe_item = RecipeItem()
             recipe_item['title'] = recipe['title']
-            recipe_item['ingredients_used'] = recipe['uses']
-            try:
-                recipe_item['ingredients_needed'] = recipe['needs']
-            except KeyError:
-                recipe_item['ingredients_needed'] = []
+            recipe_item['ingredient'] = self.item
+            recipe_item['directions'] = ""
+            recipe_item['link'] = recipe['hash']
+            
+            recipe_item['used'] = []
+            for i in recipe['uses'].split(', '):
+                all_ingredients.append(i)
+                ingredient = IngredientItem()
+                ingredient['name'] = i
+                recipe_item['used'].append(ingredient)
 
             try:
-                recipe_item['tags'] = filter(lambda tag: 'low' in tag.lower() or 'free' in tag.lower(), recipe_item['tags'])
+                recipe_item['needed'] = recipe['needs']
+            except KeyError:
+                recipe_item['needed'] = []
+
+            all_ingredients += recipe_item['needed']
+            recipe_item['ing_all'] = all_ingredients
+
+            try:
+                recipe_item['tags'] = list(filter(lambda tag: 'low' in tag.lower() or 'free' in tag.lower() or 'vegan' in tag.lower(), recipe['tags']))
             except KeyError:
                 recipe_item['tags'] = []
 
-            request = scrapy.Request(url=recipe['hash'], callback=self.get_recipe_data) # , args={'wait': 3}
+            request = SplashRequest(url=recipe['hash'], callback=self.get_recipe_data, args={'wait': 3}) # 
 
             request.meta['recipe_item'] = recipe_item
-            request.meta['display_url'] = recipe['displayurl']
-            urls.append(recipe['hash'])
             yield request
 
     def get_recipe_data(self, response):
         recipe_item = response.meta['recipe_item']
-        with open('dump.html', 'w+') as file:
-            file.write(response.text)
-        print(response.url)
+        yield recipe_item

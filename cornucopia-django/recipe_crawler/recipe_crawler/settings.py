@@ -9,6 +9,14 @@ import os.path
 #     https://docs.scrapy.org/en/latest/topics/settings.html
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
+import sys
+sys.path.append('/Users/adityapawar/Documents/GitHub/Cornucopia/cornucopia-django')
+
+import os
+os.environ['DJANGO_SETTINGS_MODULE'] = 'cornucopia.settings'
+
+from django.core.wsgi import get_wsgi_application
+application = get_wsgi_application()
 
 BOT_NAME = 'recipe_crawler'
 
@@ -86,9 +94,9 @@ DOWNLOADER_MIDDLEWARES = {
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'recipe_crawler.pipelines.RecipeCrawlerPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'recipe_crawler.pipelines.RecipeCrawlerPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html

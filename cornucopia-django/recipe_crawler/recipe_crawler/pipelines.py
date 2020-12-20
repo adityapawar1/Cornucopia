@@ -6,8 +6,12 @@
 
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
+from recipes.models import Recipe, Ingredient
 
-
-class RecipeCrawlerPipeline:
+class RecipeCrawlerPipeline():
     def process_item(self, item, spider):
+        ingredient_name = item['ingredient']['name']
+        ingredient = Ingredient.objects.filter(name=ingredient_name)[0]
+        item['ingredient'] = ingredient
+        item.save()
         return item
