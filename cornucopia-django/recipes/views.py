@@ -109,13 +109,13 @@ class RecipeFinder(View):
 
         if len(ingredients) > 1:
             # scrape
-            recipe = run_spider(ingredients)
+            recipes = run_spider(ingredients)
             return JsonResponse({'recipes': recipes}) 
         else:
             recipes = get_recipe(ingredients[0])
             if type(recipes) == type([]):
                 # scrape
-                recipe = run_spider(ingredients)
+                recipes = run_spider(ingredients)
                 return JsonResponse({'recipes': recipes})   
             else:
                 return JsonResponse({'recipes': recipes})    
