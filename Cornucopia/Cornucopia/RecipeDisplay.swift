@@ -35,6 +35,10 @@ class RecipeDisplay: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override var prefersStatusBarHidden: Bool {
+     return true
+    }
+    
     @IBAction func exit(_ sender: Any) {
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let newViewController = storyboard.instantiateViewController(withIdentifier: "RecipePicker")
