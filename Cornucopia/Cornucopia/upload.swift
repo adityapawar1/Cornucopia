@@ -13,7 +13,7 @@ class upload: UIViewController {
 
     @IBOutlet weak var progress: UIProgressView!
     @IBOutlet weak var finish: UIButton!
-    let progressC = Progress(totalUnitCount: 1)
+    let progressC = Progress(totalUnitCount: 10)
     override func viewDidLoad() {
         super.viewDidLoad()
         finish.layer.cornerRadius = 5.0
