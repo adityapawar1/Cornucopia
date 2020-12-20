@@ -4,10 +4,72 @@ from django.http import HttpResponse, JsonResponse, HttpResponseBadRequest
 from .models import Ingredient, Recipe
 import os.path
 import json
+from time import sleep
+import requests
+
+from platform import platform
+import sys
+
+if 'Linux' in platform():
+    print('linux system detected')
+    sys.path.append('/home/ubuntu/Cornucopia/cornucopia-django/recipe_crawler')
+else:
+    sys.path.append('/Users/adityapawar/Documents/GitHub/Cornucopia/cornucopia-django/recipe_crawler')
 
 from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
-from recipe_crawler.spider import MySpider
+from recipe_crawler.spiders import RecipeCrawler
+
+def get_recipe(ingredient):
+    queryset = Ingredient.objects.filter(name=ingredient)
+    if queryset.exists():
+        recipe_query = Recipe.objects.filter(ingredient=queryset[0])
+
+        if recipe_query.exists():
+            recipes = []
+            for recipe in recipe_query:
+                return_recipe = {}
+                return_recipe['title'] = recipe.title 
+                return_recipe['url'] = recipe.link
+                return_recipe['ingredients'] = recipe.ing_all
+                return_recipe['directions'] = recipe.directions
+                recipes.append(return_recipe)
+                print(return_recipe)
+
+            return recipes
+        else:
+            return 'no_recipe' # would be scraping for {ingredients} becuase it is a new ingredient'
+    else:
+        return 'no_ingredient' # ingredient {ingredients[0]} found, but no associated recipes, will scrape'
+        
+       
+
+    # return {}
+
+def run_spider(ingredients):
+    ingredient_string = ""
+    for ingredient in ingredients:
+        ingredient_string += ingredient + ', '
+        
+    ingredient_string = ingredient_string[:-2]
+    data = {
+            'project': 'recipe_crawler',
+            'spider': 'RecipeCrawler',
+            'ingredients': ingredient_string,
+    }
+
+    response = requests.post('http://localhost:6800/schedule.json', data=data)
+    print('started spider')
+
+    sleep(2)
+    for i in range(15):
+        recipe = get_recipe(ingredients[0])
+        if recipe != 'no_recipe' and recipe != 'no_ingredient':
+            print('Scraper Done!!')
+            break
+        sleep(2)
+
+    return recipe
 
 
 # Create your views here.
@@ -20,26 +82,26 @@ class RecipeFinder(View):
         return JsonResponse({})
 
     def post(self, request):
-        try:
-            ingredients = request.body['ingredients']
-        except KeyError:
-            return HttpResponseBadRequest("No ingredient specified")
-
-        if len(ingredients) >= 1:
-            # scrape
-            pass
-        else:
-            queryset = Ingredient.objects.filter(name=indgredient[0])
-            if queryset.exists():
-                JsonResponse({'objects': 'found'})
-                pass
-            else:
-                # scrape
-
-        Ingredient.objects.filter
-        if len(request.body) <= 0:
-            return JsonResponse({'yo': 'no json sent'})
-            
         body = json.loads(request.body)
-        return JsonResponse(body)
+
+        # error handling
+        if len(request.body) <= 0:
+            return HttpResponseBadRequest('No requests body')
+        try:
+            ingredients = body['ingredients']
+        except KeyError:
+            return HttpResponseBadRequest("No ingredient(s) specified")
+
+
+        if len(ingredients) > 1:
+            # scrape
+            recipe = run_spider(ingredients)
+        else:
+            recipes = get_recipe(ingredients[0])
+            if recipes == 'no_ingredient' or recipes == 'no_recipe':
+                # scrape
+                recipe = run_spider(ingredients)
+                return JsonResponse({'recipes': recipes})   
+            else:
+                return JsonResponse({'recipes': recipes})    
 

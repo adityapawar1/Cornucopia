@@ -6,15 +6,15 @@ from recipe_crawler.items import IngredientItem, RecipeItem
 from recipes.models import Ingredient
 import json
 
-def get_supercook_params(indgredients):
-    indgredient_string = ""
-    for indgredient in indgredients:
-        indgredient_string += indgredient + ','
+def get_supercook_params(ingredients):
+    ingredient_string = ""
+    for ingredient in ingredients:
+        ingredient_string += ingredient + ','
 
-    indgredient_string = indgredient_string[:-1] # strip extra comma at the end
+    ingredient_string = ingredient_string[:-1] # strip extra comma at the end
     query_string = { 
         'needsimage': 1,
-        'kitchen':  indgredient_string, # 'tomato,bread,apple'
+        'kitchen':  ingredient_string, # 'tomato,bread,apple'
         'focus': '',
         'kw': '',
         'catname': ',,',
