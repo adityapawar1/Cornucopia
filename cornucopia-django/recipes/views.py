@@ -6,19 +6,7 @@ import os.path
 import json
 from time import sleep
 import requests
-
 from platform import platform
-import sys
-
-if 'Linux' in platform():
-    print('linux system detected')
-    sys.path.append('/home/ubuntu/Cornucopia/cornucopia-django/recipe_crawler')
-else:
-    sys.path.append('/Users/adityapawar/Documents/GitHub/Cornucopia/cornucopia-django/recipe_crawler')
-
-from scrapy.crawler import CrawlerProcess
-from scrapy.utils.project import get_project_settings
-from recipe_crawler.spiders import RecipeCrawler
 
 def get_recipe(ingredient):
     queryset = Ingredient.objects.filter(name=ingredient)

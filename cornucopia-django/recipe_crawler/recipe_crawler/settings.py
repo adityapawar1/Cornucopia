@@ -10,6 +10,7 @@ import os.path
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 import sys
+
 if 'Linux' in platform():
     print('linux system detected')
     sys.path.append('/home/ubuntu/Cornucopia/cornucopia-django')
