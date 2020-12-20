@@ -1,5 +1,4 @@
 # Cornucopia
-# Cornucopia
 Cornucopia is an app that lets users use accessible ingredients to discover new dishes. Based on the entered ingredients, the program will refer users to recipes that contain them. Using multi-classification image recognition and web scraping, Cornucopia recommends recipes using ingredients that the users may already have.
 
 # Frontend
