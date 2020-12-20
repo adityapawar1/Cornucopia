@@ -52,7 +52,7 @@ def run_spider(ingredients):
 
     for i in range(20):
         recipe = get_recipe(ingredients[0])
-        if recipe != 'no_recipe' and recipe != 'no_ingredient':
+        if type(recipe) == type({}):
             print('Scraper Done!!')
             break
         sleep(1)
