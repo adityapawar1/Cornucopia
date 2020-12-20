@@ -2,7 +2,7 @@
 //  RecipeDisplay.swift
 //  Cornucopia
 //
-//  Created by fredt_public on 12/19/20.
+//  Created by Brayden Tam, Akhil Datla, Aditya Pawar, Vivek Nadig on 12/19/20.
 //  Copyright © 2020 UMassHackathon. All rights reserved.
 //
 
@@ -33,6 +33,10 @@ class RecipeDisplay: UIViewController {
         
         
         // Do any additional setup after loading the view.
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+     return true
     }
     
     @IBAction func exit(_ sender: Any) {

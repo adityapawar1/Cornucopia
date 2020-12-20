@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  Cornucopia
 //
-//  Created by fredt_public on 12/18/20.
+//  Created by Brayden Tam, Akhil Datla, Aditya Pawar, Vivek Nadig on 12/18/20.
 //  Copyright © 2020 UMassHackathon. All rights reserved.
 //
 
