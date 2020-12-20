@@ -48,16 +48,15 @@ def run_spider(ingredients):
     }
 
     response = requests.post('http://localhost:6800/schedule.json', data=data)
-    print('started spider')
+    print(f'started spider for {ingredient_string}')
 
     for i in range(20):
         recipe = get_recipe(ingredients[0])
-        if type(recipe) == type({}):
-            print('Scraper Done!!')
+        if type(recipe) == type([]):
+            print(f'{ingredient_string} Scraper Done')
+            print(recipe)
             break
         sleep(1)
-
-    recipe = get_recipe(ingredients[0])
 
     if type(recipe) == type("string"):
         recipe =  [
@@ -114,7 +113,7 @@ class RecipeFinder(View):
             return JsonResponse({'recipes': recipes}) 
         else:
             recipes = get_recipe(ingredients[0])
-            if recipes == 'no_ingredient' or recipes == 'no_recipe':
+            if type(recipe) == type([]):
                 # scrape
                 recipe = run_spider(ingredients)
                 return JsonResponse({'recipes': recipes})   
