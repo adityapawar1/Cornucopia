@@ -82,7 +82,10 @@ class RecipeFinder(View):
         return JsonResponse({})
 
     def post(self, request):
-        body = json.loads(request.body)
+        try:
+            body = json.loads(request.body)
+        except json.decoder.JSONDecodeError:
+            print(f'json.decoder.JSONDecodeError, json that was attempted was {request.body}')
 
         # error handling
         if len(request.body) <= 0:
