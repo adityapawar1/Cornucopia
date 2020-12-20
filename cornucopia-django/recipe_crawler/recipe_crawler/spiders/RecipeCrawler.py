@@ -85,10 +85,10 @@ class RecipeSpider(CrawlSpider):
             except KeyError:
                 recipe_item['tags'] = []
 
-            request = SplashRequest(url=recipe['hash'], callback=self.get_recipe_data, args={'wait': 3}) # 
+            # request = SplashRequest(url=recipe['hash'], callback=self.get_recipe_data, args={'wait': 3}) # 
 
             request.meta['recipe_item'] = recipe_item
-            yield request
+            yield recipe_item
 
     def get_recipe_data(self, response):
         recipe_item = response.meta['recipe_item']
