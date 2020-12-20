@@ -4,6 +4,7 @@ from django.contrib.postgres.fields import ArrayField
 # Create your models here.
 class Ingredient(models.Model):
     name = models.CharField(max_length=64)
+    bad_search = models.BooleanField()
 
     # def __str__(self):
     #     return name

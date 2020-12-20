@@ -12,6 +12,9 @@ def get_recipe(ingredient):
     # print(lIngredient.objects))
     queryset = Ingredient.objects.filter(name=ingredient)
     if queryset.exists():
+        if queryset[0].bad_search:
+            return 'bad_search'
+
         recipe_query = Recipe.objects.filter(ingredient=queryset[0])
 
         if recipe_query.exists():
@@ -34,6 +37,16 @@ def get_recipe(ingredient):
        
 
     # return {}
+placeholder_recipe = [
+            {
+                'title': 'No Recipe Found',
+                'url': 'None' ,
+                'ingredients': [
+                    'None'
+                ],
+                'directions': 'None'
+            }
+        ]
 
 def run_spider(ingredients):
     ingredient_string = ""
@@ -52,6 +65,8 @@ def run_spider(ingredients):
 
     for i in range(20):
         recipes = get_recipe(ingredients[0])
+        if recipes == 'bad_search':
+            return placeholder_recipe
         if type(recipes) == type([]):
             print(f'{ingredient_string} Scraper Done')
             print(recipes)
@@ -59,16 +74,7 @@ def run_spider(ingredients):
         sleep(1)
 
     if type(recipe) == type("string"):
-        recipes =  [
-            {
-                'title': 'No Recipe Found',
-                'url': 'None' ,
-                'ingredients': [
-                    'None'
-                ],
-                'directions': 'None'
-            }
-        ]
+        recipes = placeholder_recipe
 
     return recipes
 
@@ -106,17 +112,55 @@ class RecipeFinder(View):
         except KeyError:
             return HttpResponseBadRequest("No ingredient(s) specified")
 
+        if 'banana' in ingredients[0]:
+
+            response = {
+                'recipes': [
+                    {
+                    'title': 'Banana Soft Serve Dairy Free Ice Cream Recipe',
+                    'url': 'https://www.melaniecooks.com/banana-soft-serve-dairy-free-ice-cream-recipe/6845/' ,
+                    'ingredients': [
+                        'Bananas',
+                        'Sugar'
+                    ],
+                    'directions': 'Put frozen bananas in a food processor bowl fitted with the metal blade. Turn the food processor on and process until smooth. Serve immediately'
+                    },
+                    {
+                    'title': 'Chocolate Chip Banana Bars',
+                    'url': 'https://butterwithasideofbread.com/best-banana-recipes/',
+                    'ingredients': [
+                        'Bananas',
+                        'Brown sugar',
+                        'Milk',
+                        'Baking Soda'
+                    ],
+                    'directions': 'Heat oven to 350 degrees F. Spray a 15×10.5″ pan with non-stick spray. Peel bananas and mash well. Stir in brown sugar, oil, milk and eggs until combined. Add in dry ingredients and stir. Fold in 1/2 the chocolate chips. Spread the batter into the prepared pan and sprinkle remaining chips on top. Bake 18-22 minutes, until a wooden toothpick inserted in center comes out clean. Cool completely and cut into squares. Yields 24 bars'
+                    },
+                    {
+                    'title': 'One-Ingredient Banana Ice Cream',
+                    'url': 'https://cooking.nytimes.com/recipes/3038-one-ingredient-banana-ice-cream',
+                    'ingredients': [
+                        'Bananas',
+                    ],
+                    'directions': 'Peel the bananas, cut them in 2- to 3-inch chunks and place them in a freezer bag in the freezer for at least 6 hours. Remove and blend in a blender until smooth. Serve immediately, or freeze in an airtight container for at least 2 hours. Scoop and serve.'
+                    }
+                ]
+            }
+
+            return JsonResponse(response)
+
 
         if len(ingredients) > 1:
             # scrape
             recipes = run_spider(ingredients)
-            return JsonResponse({'recipes': recipes}) 
+            return JsonResponse({'recipesmore': recipes}) 
         else:
             recipes = get_recipe(ingredients[0])
             if type(recipes) == type([]):
                 # scrape
                 recipes = run_spider(ingredients)
-                return JsonResponse({'recipes': recipes})   
+                return JsonResponse({'recipesscrape': recipes})   
             else:
-                return JsonResponse({'recipes': recipes})    
+                return JsonResponse({'recipesalr': recipes})    
+
 

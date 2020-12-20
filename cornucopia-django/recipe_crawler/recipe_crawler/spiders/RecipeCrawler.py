@@ -34,12 +34,12 @@ class RecipeSpider(CrawlSpider):
         self.item = IngredientItem() 
         self.item['name'] = self.ingredients[0]
 
-        ingredient_name = self.ingredients[0]
-        ingredient = Ingredient.objects.filter(name=ingredient_name)
+        self.ingredient_name = self.ingredients[0]
+        self.ingredient = Ingredient.objects.filter(name=ingredient_name)
 
         if not ingredient.exists():
-            ingredient = Ingredient(name=ingredient_name)
-            ingredient.save()
+            self.ingredient = Ingredient(name=ingredient_name, bad_search=False)
+            
 
     def start_requests(self):
         urls = [
@@ -66,8 +66,12 @@ class RecipeSpider(CrawlSpider):
             recipe_item['link'] = recipe['hash']
             
             if len(recipe['uses']) <= 0:
+                self.ingredient = Ingredient(name=ingredient_name, bad_search=True)
+                self.ingredient.save()
                 return
-                
+
+            self.ingredient.save()
+            
             recipe_item['used'] = []
             for i in recipe['uses'].split(', '):
                 all_ingredients.append(i)
