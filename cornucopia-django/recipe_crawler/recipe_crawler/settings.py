@@ -15,7 +15,7 @@ BOT_NAME = 'recipe_crawler'
 SPIDER_MODULES = ['recipe_crawler.spiders']
 NEWSPIDER_MODULE = 'recipe_crawler.spiders'
 
-SPLASH_URL = 'http://localhost:8050/'
+SPLASH_URL = 'http://54.215.157.199:8050/'
 
 DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
 HTTPCACHE_STORAGE = 'scrapy_splash.SplashAwareFSCacheStorage'

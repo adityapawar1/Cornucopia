@@ -26,7 +26,7 @@ def get_supercook_params(indgredients):
     return query_string
 
 class RecipeSpider(CrawlSpider):
-    name = 'ReciperCrawler'
+    name = 'RecipeCrawler'
     start_urls = ['http://https://google.com/']
 
     def __init__(self, indgredients='', *args, **kwargs):
@@ -72,9 +72,6 @@ class RecipeSpider(CrawlSpider):
             yield request
 
     def get_recipe_data(self, response):
-        pass
-        # recipe_item = response.meta['recipe_item']
-        # with open('dump.html', 'w+') as file:
-        #     file.write(response.text)
-
-        # self.logger.debug(url)
+        recipe_item = response.meta['recipe_item']
+        with open('dump.html', 'w+') as file:
+            file.write(response.text)
