@@ -49,13 +49,12 @@ def run_spider(ingredients):
     response = requests.post('http://localhost:6800/schedule.json', data=data)
     print('started spider')
 
-    sleep(2)
-    for i in range(15):
+    for i in range(20):
         recipe = get_recipe(ingredients[0])
         if recipe != 'no_recipe' and recipe != 'no_ingredient':
             print('Scraper Done!!')
             break
-        sleep(2)
+        sleep(1)
 
     return recipe
 
