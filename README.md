@@ -7,5 +7,6 @@ We designed Cornucopia to be simple, yet amazing. Our app uses vibrant colors pa
 # Backend
 The goal of the image recognition software is to implement a model that efficiently classifies ingredients from a picture.   
 Powered by state of the art technology such as machine learning and web scraping, Cornucopia identifies recipes with your everyday ingredients.
+Recipe API served using Django and a postgreSQL Database, while the Scrapy webspiders provide data for the api.
 
 Created by: Akhil Datla, Aditya Pawar, Brayden Tam, Vivek Nadig in the HackUMass Hackathon
