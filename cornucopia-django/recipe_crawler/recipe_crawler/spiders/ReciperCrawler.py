@@ -22,7 +22,7 @@ def get_supercook_params(indgredients):
         'exclude': '',
         'start': 0
     }
-
+    print(query_string)
     return query_string
 
 class RecipeSpider(CrawlSpider):
@@ -42,6 +42,7 @@ class RecipeSpider(CrawlSpider):
         for url in urls:
             if 'supercook' in url:
                 supercook_query_string = get_supercook_params(self.indgredients)
+                print(urlencode(supercook_query_string))
                 yield scrapy.Request(url=url + urlencode(supercook_query_string), callback=self.supercook, method='POST')
 
     def supercook(self, response):
@@ -71,8 +72,9 @@ class RecipeSpider(CrawlSpider):
             yield request
 
     def get_recipe_data(self, response):
-        recipe_item = response.meta['recipe_item']
-        with open('dump.html', 'w+') as file:
-            file.write(response.text)
+        pass
+        # recipe_item = response.meta['recipe_item']
+        # with open('dump.html', 'w+') as file:
+        #     file.write(response.text)
 
-        self.logger.debug(url)
+        # self.logger.debug(url)
